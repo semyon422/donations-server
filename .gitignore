@@ -1,0 +1,7 @@
+tree
+logs
+nginx.conf.compiled
+temp/*
+backups/*
+!temp/.keep
+!backups/.keep

@@ -1,0 +1,2 @@
+#!/bin/bash
+mysqldump --defaults-file=my.cnf --result-file="backups/dump $(date -u --rfc-2822).sql" backend

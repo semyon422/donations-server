@@ -1,0 +1,48 @@
+<section class="section">
+	<div class="container">
+		<p class="title">
+			donation
+		</p>
+		<table class="table is-hoverable">
+			<thead>
+				<tr>
+					<th>user</th>
+					<th>created at</th>
+					<th>service</th>
+					<th>in</th>
+					<th>out</th>
+					<th>is complete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a href="/users/<%= donation.user.id %>"><%= donation.user.name %></a></th>
+					<td><a href="/donations/<%= donation.id %>"><%= os.date("%c", donation.created_at) %></a></th>
+					<td><%= donation.service %></th>
+					<td><%= donation.amount_in %> <%= donation.currency_in %></th>
+					<td><%= donation.amount_out %> <%= donation.currency_out %></th>
+					<td><%= donation.is_complete and "yes" or "no" %></th>
+				</tr>
+			<tbody>
+		</table>
+
+		<form class="block" method="POST" action="">
+			<input name="method" value="DELETE" hidden>
+
+			<div class="field">
+				<div class="control">
+					<button class="button is-link">Delete</button>
+				</div>
+			</div>
+		</form>
+		<form class="block" method="POST" action="">
+			<input name="method" value="PATCH" hidden>
+
+			<div class="field">
+				<div class="control">
+					<button class="button is-link">Switch is_complete</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>

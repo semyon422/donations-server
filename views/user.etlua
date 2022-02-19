@@ -1,0 +1,129 @@
+<section class="section">
+	<div class="container">
+		<p class="title">
+			user
+		</p>
+		<table class="table is-hoverable">
+			<thead>
+				<tr>
+					<th>name</th>
+					<th>description</th>
+					<th>donations amount</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a href="/users/<%= user.id %>"><%= user.name %></a></th>
+					<td><%= user.description %></th>
+					<td><%= user.donations_amount %></th>
+				</tr>
+			<tbody>
+		</table>
+
+		<form class="block" method="POST" action="">
+			<div class="field">
+				<p class="control">
+					<input class="input" type="text" name="name" placeholder="name" value="<%= user.name %>">
+				</p>
+			</div>
+			<div class="field">
+				<p class="control">
+					<input class="input" type="text" name="description" placeholder="description" value="<%= user.description %>">
+				</p>
+			</div>
+
+			<input name="method" value="PATCH" hidden>
+
+			<div class="field">
+				<div class="control">
+					<button class="button is-link">Update</button>
+				</div>
+			</div>
+		</form>
+		<form class="block" method="POST" action="">
+			<input name="method" value="DELETE" hidden>
+
+			<div class="field">
+				<div class="control">
+					<button class="button is-link">Delete</button>
+				</div>
+			</div>
+		</form>
+		<table class="table is-hoverable">
+			<thead>
+				<tr>
+					<th>created at</th>
+					<th>service</th>
+					<th>in</th>
+					<th>out</th>
+					<th>is complete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% for _, donation in ipairs(user.donations) do %>
+					<tr>
+						<td><a href="/donations/<%= donation.id %>"><%= os.date("%c", donation.created_at) %></a></th>
+						<td><%= donation.service %></th>
+						<td><%= donation.amount_in %> <%= donation.currency_in %></th>
+						<td><%= donation.amount_out %> <%= donation.currency_out %></th>
+						<td><%= donation.is_complete and "yes" or "no" %></th>
+					</tr>
+				<% end %>
+			<tbody>
+		</table>
+		<form method="POST" action="/donations">
+			<div class="field">
+				<p class="control">
+					<input class="input" type="datetime-local" name="created_at">
+				</p>
+			</div>
+			<div class="field">
+				<p class="control">
+					<span class="select">
+						<select name="service_type">
+							<% for _, service_type in ipairs(service_types) do %>
+								<option><%= service_type %></option>
+							<% end %>
+						</select>
+					</span>
+				</p>
+			</div>
+			<div class="field has-addons">
+				<p class="control">
+					<span class="select">
+						<select name="currency_in_type">
+							<% for _, currency_type in ipairs(currency_types) do %>
+								<option><%= currency_type %></option>
+							<% end %>
+						</select>
+					</span>
+				</p>
+				<p class="control">
+					<input class="input" type="text" name="amount_in">
+				</p>
+			</div>
+			<div class="field has-addons">
+				<p class="control">
+					<span class="select">
+						<select name="currency_out_type">
+							<% for _, currency_type in ipairs(currency_types) do %>
+								<option><%= currency_type %></option>
+							<% end %>
+						</select>
+					</span>
+				</p>
+				<p class="control">
+					<input class="input" type="text" name="amount_out">
+				</p>
+			</div>
+
+			<input name="user_id" value="<%= params.user_id %>" hidden>
+
+			<div class="field">
+				<div class="control">
+					<button class="button is-link">Submit</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
