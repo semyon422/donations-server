@@ -11,6 +11,7 @@
 					<th>service</th>
 					<th>in</th>
 					<th>out</th>
+					<th>out USD</th>
 					<th>is complete</th>
 				</tr>
 			</thead>
@@ -19,8 +20,9 @@
 					<td><a href="/users/<%= donation.user.id %>"><%= donation.user.name %></a></th>
 					<td><a href="/donations/<%= donation.id %>"><%= os.date("%c", donation.created_at) %></a></th>
 					<td><%= donation.service %></th>
-					<td><%= donation.amount_in %> <%= donation.currency_in %></th>
-					<td><%= donation.amount_out %> <%= donation.currency_out %></th>
+					<td><%= ("%0.2f"):format(donation.amount_in) %> <%= donation.currency_in %></th>
+					<td><%= ("%0.2f"):format(donation.amount_out) %> <%= donation.currency_out %></th>
+					<td><%= ("%0.2f"):format(donation.amount_out_usd) %> USD</th>
 					<td><%= donation.is_complete and "yes" or "no" %></th>
 				</tr>
 			<tbody>

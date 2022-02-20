@@ -15,7 +15,7 @@
 				<tr>
 					<td><a href="/users/<%= user.id %>"><%= user.name %></a></th>
 					<td><%= user.description %></th>
-					<td><%= user.donations_amount %></th>
+					<td><%= ("%0.2f"):format(user.donations_amount) %> USD</th>
 				</tr>
 			<tbody>
 		</table>
@@ -49,6 +49,15 @@
 				</div>
 			</div>
 		</form>
+		<form class="block" method="POST" action="">
+			<input name="method" value="PUT" hidden>
+
+			<div class="field">
+				<div class="control">
+					<button class="button is-link">Compute</button>
+				</div>
+			</div>
+		</form>
 		<table class="table is-hoverable">
 			<thead>
 				<tr>
@@ -56,6 +65,7 @@
 					<th>service</th>
 					<th>in</th>
 					<th>out</th>
+					<th>out USD</th>
 					<th>is complete</th>
 				</tr>
 			</thead>
@@ -64,8 +74,9 @@
 					<tr>
 						<td><a href="/donations/<%= donation.id %>"><%= os.date("%c", donation.created_at) %></a></th>
 						<td><%= donation.service %></th>
-						<td><%= donation.amount_in %> <%= donation.currency_in %></th>
-						<td><%= donation.amount_out %> <%= donation.currency_out %></th>
+						<td><%= ("%0.2f"):format(donation.amount_in) %> <%= donation.currency_in %></th>
+						<td><%= ("%0.2f"):format(donation.amount_out) %> <%= donation.currency_out %></th>
+						<td><%= ("%0.2f"):format(donation.amount_out_usd) %> USD</th>
 						<td><%= donation.is_complete and "yes" or "no" %></th>
 					</tr>
 				<% end %>

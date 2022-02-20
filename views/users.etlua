@@ -16,7 +16,7 @@
 					<tr>
 						<td><a href="/users/<%= user.id %>"><%= user.name %></a></th>
 						<td><%= user.description %></th>
-						<td><%= user.donations_amount %></th>
+						<td><%= ("%0.2f"):format(user.donations_amount) %> USD</th>
 					</tr>
 				<% end %>
 			<tbody>

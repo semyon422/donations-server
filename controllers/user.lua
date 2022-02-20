@@ -30,6 +30,8 @@ function user_c:POST()
 		user.name = params.name
 		user.description = params.description
 		user:update("name", "description")
+	elseif params.method == "PUT" then
+		Users:compute_amount(user)
 	end
 
 	return {redirect_to = self:url_for(user)}

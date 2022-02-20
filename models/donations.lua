@@ -22,7 +22,15 @@ Donations.currency_types = enum({
 	RUB = 1,
 	USD = 2,
 	EUR = 3,
+	UAH = 4,
 })
+
+local currency_ratio = {
+	USD = 1,
+	RUB = 1 / 80,
+	EUR = 90 / 80,
+	UAH = 1 / 28,
+}
 
 function Donations:to_name(donation)
 	donation.service = Donations.service_types:to_name(donation.service_type)
@@ -32,7 +40,8 @@ function Donations:to_name(donation)
 		donation.is_complete = true
 	else
 		donation.is_complete = false
-	end 
+	end
+	donation.amount_out_usd = donation.amount_out * currency_ratio[donation.currency_out]
 end
 
 return Donations

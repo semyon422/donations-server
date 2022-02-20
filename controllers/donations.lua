@@ -1,4 +1,5 @@
 local Donations = require("models.donations")
+local Users = require("models.users")
 local preload = require("lapis.db.model").preload
 local date = require("date")
 
@@ -35,6 +36,7 @@ function donations_c:POST()
 		amount_in = tonumber(params.amount_in),
 		amount_out = tonumber(params.amount_out),
 	})
+	Users:compute_amount(donation:get_user())
 
 	return {redirect_to = self:url_for(donation)}
 	-- return {json = {
